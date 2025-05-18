@@ -45,7 +45,7 @@ class UserController {
   }
 
   async getOneUser(req, res) {
-    const { id, email } = req.body
+    const id = req.params.id
     const user = await User.findOne({
       where: { id },
     })
