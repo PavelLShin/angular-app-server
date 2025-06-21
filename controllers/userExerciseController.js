@@ -26,7 +26,7 @@ class userExerciseController {
 
   async deleteAll(req, res) {
     try {
-      const { exerciseId, userExerciseDayId } = req.params
+      const { userExerciseDayId } = req.params
       const result = await UserExercise.destroy({
         where: { userExerciseDayId: userExerciseDayId },
       })

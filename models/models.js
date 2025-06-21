@@ -46,11 +46,22 @@ const Type = sequelize.define('type', {
   tittle: { type: DataTypes.STRING, unique: true, allowNull: false },
 })
 
-// const ExerciseInfo = sequelize.define('exercise_info', {
-//   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-//   title: { type: DataTypes.STRING, allowNull: false },
-//   description: { type: DataTypes.STRING, allowNull: false },
-// })
+// для дня практики тренировок (день)
+const UserTraningPractice = sequelize.define('user_traning_practice', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  tittle: { type: DataTypes.STRING, unique: false, allowNull: false },
+  start: { type: DataTypes.STRING, allowNull: true },
+  end: { type: DataTypes.STRING, allowNull: true },
+  duration: { type: DataTypes.STRING, allowNull: true },
+})
+
+// для тренировок в день практики
+const UserExercisePractice = sequelize.define('user_exercise_practice', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  name: { type: DataTypes.STRING, unique: false, allowNull: false },
+  dataArray: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: true },
+  dataPractice: { type: DataTypes.STRING, allowNull: false },
+})
 
 User.hasOne(UserProfile)
 UserProfile.belongsTo(User)
@@ -67,8 +78,17 @@ UserExercise.belongsTo(UserExerciseDay)
 Exercise.hasMany(UserExercise)
 UserExercise.belongsTo(Exercise)
 
-// Exercise.hasMany(UserExercise)
-// UserExercise.belongsTo(Exercise)
+UserExerciseDay.hasMany(UserTraningPractice)
+UserTraningPractice.belongsTo(UserExerciseDay)
+
+UserProfile.hasMany(UserTraningPractice)
+UserTraningPractice.belongsTo(UserProfile)
+
+UserTraningPractice.hasMany(UserExercisePractice)
+UserExercisePractice.belongsTo(UserTraningPractice)
+
+Exercise.hasMany(UserExercisePractice)
+UserExercisePractice.belongsTo(Exercise)
 
 Type.hasMany(Exercise)
 Exercise.belongsTo(Type)
@@ -81,4 +101,6 @@ module.exports = {
   Exercise,
   Type,
   UserData,
+  UserTraningPractice,
+  UserExercisePractice,
 }
