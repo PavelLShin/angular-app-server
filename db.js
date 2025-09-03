@@ -1,4 +1,7 @@
 const { Sequelize } = require('sequelize')
+const { config } = require('dotenv')
+
+config()
 
 module.exports = new Sequelize(
   process.env.DB_NAME,
@@ -8,5 +11,6 @@ module.exports = new Sequelize(
     dialect: 'postgres',
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-  }
+  },
+  { sync: true }
 )

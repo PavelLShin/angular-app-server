@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    ports:
+      - '5000:5000'
+    depends_on:
+      - db_athletic_app
+      - athletic_app_client
+  db_athletic_app:
+    image: postgres:14.19-alpine
+    environment:
+      - POSTGRES_HOST=db_athletic_app
+      - POSTGRES_PORT=5432
+      - POSTGRES_PASSWORD=1045Shinp
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=athletic_app
+    volumes:
+      - ./postgresql/data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  athletic_app_client:
+    build: D:\JSProject\athletic-app
+    ports:
+      - '80:80'

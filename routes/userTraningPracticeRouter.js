@@ -4,6 +4,10 @@ const userTraningPracticeController = require('../controllers/userTraningPractic
 
 router.post('/', userTraningPracticeController.createTraningPracticeDay)
 router.get('/:id', userTraningPracticeController.getTraningPracticeDay)
+router.get(
+  '/calendar/:userProfileId',
+  userTraningPracticeController.getTraningPracticeDays
+)
 router.patch('/', userTraningPracticeController.update)
 
 module.exports = router

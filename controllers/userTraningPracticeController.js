@@ -10,6 +10,14 @@ class userTraningPracticeController {
     return res.json(practiceDay)
   }
 
+  async getTraningPracticeDays(req, res) {
+    const { userProfileId } = req.params
+    const practiceDays = await UserTraningPractice.findAll({
+      where: { userProfileId: userProfileId },
+    })
+    return res.json(practiceDays)
+  }
+
   async createTraningPracticeDay(req, res, next) {
     try {
       const { tittle, start, end, userExerciseDayId, userProfileId, duration } =
