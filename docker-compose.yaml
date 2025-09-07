@@ -23,6 +23,6 @@ services:
 
   athletic_app_client:
     # build: D:\JSProject\athletic-app
-    build: ../athletic_app_client
+    build: ../angular_app_client
     ports:
       - '80:80'
